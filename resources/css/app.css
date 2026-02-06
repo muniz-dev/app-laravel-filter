@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@layer components {
+    .card-hover {
+        @apply transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl;
+    }
+    
+    .gradient-text {
+        @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+    }
+}
