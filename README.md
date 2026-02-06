@@ -13,6 +13,7 @@ Aplicação Laravel 11 com Livewire para filtragem de produtos com persistência
 - ✅ **Sistema de Auditoria** - Logs de atividades e pesquisas
 - ✅ **Código Limpo** - Arquitetura com Repositories e Services
 - ✅ **Documentação Completa** - PHPDoc em todas as classes
+- ✅ **Testes Automatizados** - 30 testes com PHPUnit cobrindo toda a aplicação
 
 ## Requisitos
 
@@ -261,6 +262,78 @@ A aplicação segue os princípios de código limpo:
 - **Services**: Lógica de negócio
 - **Observers**: Eventos de modelos
 - **Controllers**: Apenas coordenação de requisições
+
+## Testes
+
+A aplicação possui uma suíte completa de testes automatizados usando PHPUnit.
+
+### Executando os Testes
+
+```bash
+# Executar todos os testes
+docker-compose exec app php artisan test
+
+# Executar apenas testes unitários
+docker-compose exec app php artisan test --testsuite=Unit
+
+# Executar apenas testes de feature
+docker-compose exec app php artisan test --testsuite=Feature
+
+# Executar um teste específico
+docker-compose exec app php artisan test tests/Unit/Repositories/ProductRepositoryTest.php
+
+# Executar com cobertura de código
+docker-compose exec app php artisan test --coverage
+```
+
+### Estrutura de Testes
+
+#### Testes Unitários (`tests/Unit/`)
+
+- **Repositories**: Testes dos repositórios de dados
+  - `ProductRepositoryTest.php` - 9 testes (filtros, busca, contagem de produtos)
+- **Services**: Testes dos serviços de negócio
+  - `ProductFilterServiceTest.php` - 3 testes (lógica de filtragem e paginação)
+  - `AuditServiceTest.php` - 6 testes (logging de atividades e pesquisas)
+
+#### Testes de Feature (`tests/Feature/`)
+
+- **Livewire**: Testes dos componentes Livewire
+  - `ProductFilterTest.php` - 7 testes (filtros, persistência de URL, limpeza)
+- **Controllers**: Testes dos controllers
+  - `ActivityLogControllerTest.php` - 3 testes (visualização e filtros de logs de atividade)
+  - `SearchLogControllerTest.php` - 3 testes (visualização e filtros de logs de pesquisa)
+
+### Cobertura de Testes
+
+Os testes cobrem:
+
+- ✅ Filtros de produtos (nome, categoria, marca)
+- ✅ Filtros combinados (múltiplos filtros simultâneos)
+- ✅ Paginação de resultados
+- ✅ Persistência de filtros na URL
+- ✅ Logging de atividades (criação, atualização, exclusão)
+- ✅ Logging de pesquisas
+- ✅ Controllers de admin (visualização e filtros)
+- ✅ Repositórios e serviços
+
+### Estatísticas
+
+- **Total de Testes**: 30
+- **Total de Asserções**: 56
+- **Tempo de Execução**: ~1.2s
+
+### Factories
+
+As factories estão em `database/factories/`:
+
+- `BrandFactory.php` - Geração de marcas para testes
+- `CategoryFactory.php` - Geração de categorias para testes
+- `ProductFactory.php` - Geração de produtos para testes
+- `ActivityLogFactory.php` - Geração de logs de atividade para testes
+- `SearchLogFactory.php` - Geração de logs de pesquisa para testes
+
+Para mais detalhes, consulte `tests/README.md`.
 
 ## Licença
 
